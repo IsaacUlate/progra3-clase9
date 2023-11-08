@@ -46,4 +46,22 @@ public class DatabaseService {
             return null;
         }
     }
+
+    public Producto getProducto(int id) {
+        System.out.println("logId = " + id);
+        try {
+            String query = "SELECT * FROM productos WHERE id_producto = ?";
+ 
+            return jdbcTemplate.queryForObject(query, (rs, rowNum) -> {
+                int id_producto = (int)rs.getInt("id_producto");
+                String nombre_producto = rs.getString("nombre_producto");
+                String descripcion_producto = rs.getString("descripcion_producto");
+              
+                return new Producto(id_producto, nombre_producto, descripcion_producto);
+            }, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

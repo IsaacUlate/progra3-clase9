@@ -25,4 +25,9 @@ public class MyRestController {
     public List<Producto> all(){
         return databaseService.getAllProducts();
     }
+    
+    @GetMapping("/byid")
+    public Producto all(int id) {
+        return databaseService.getProducto(id) ;
+    }
 }
