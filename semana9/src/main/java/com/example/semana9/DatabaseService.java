@@ -64,4 +64,36 @@ public class DatabaseService {
             return null;
         }
     }
+
+    public void updateProducto(Producto producto) {
+        try {
+            String query = "UPDATE productos SET nombre_producto = ?, descripcion_producto = ? WHERE id_producto = ?";
+            jdbcTemplate.update(query, producto.getNombre_producto(),producto.getDescripcion_producto() , producto.getId_producto());
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if needed
+        }
+    }
+
+    public void insertProducto(Producto producto) {
+        try {
+            String query = "INSERT productos SET nombre_producto = ?, descripcion_producto = ? ";
+            jdbcTemplate.update(query, producto.getNombre_producto(),producto.getDescripcion_producto());
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle exceptions if needed
+        }
+    }
+
+    public int deleteProducto(int id) {
+        try {
+            String query = "DELETE FROM productos WHERE id_producto = ?";
+            jdbcTemplate.update(query, id);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+            // Handle exceptions if needed
+        }
+    }
 }
